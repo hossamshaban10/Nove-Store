@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تحديد الموقع</title>
+</head>
+<body>
+
+    <h2>تسجيل الحضور بالموقع</h2>
+
+    <button onclick="getLocation()">تحديد موقعي</button>
+    <p id="status"></p>
+
+    <input type="hidden" id="lat">
+    <input type="hidden" id="lng">
+
+    <script>
+        function getLocation() {
+            const status = document.getElementById("status");
+
+            if (!navigator.geolocation) {
+                status.innerText = "المتصفح لا يدعم تحديد الموقع";
+                return;
+            }
+
+            status.innerText = "جاري تحديد الموقع...";
+
+            navigator.geolocation.getCurrentPosition(
+                function (pos) {
+                    document.getElementById("lat").value = pos.coords.latitude;
+                    document.getElementById("lng").value = pos.coords.longitude;
+
+                    status.innerText = "تم تحديد الموقع بنجاح";
+                    console.log(
+                        pos.coords.latitude,
+                        pos.coords.longitude
+                    );
+                },
+                function () {
+                    status.innerText = "فشل تحديد الموقع";
+                }
+            );
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nove Online Store</title>
+    <link rel="icon" href="./imges/icon.jpeg" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <link rel="stylesheet" href="./CSS/btn.css" />
+    <link rel="stylesheet" href="./CSS/home.css" />
+    <link rel="stylesheet" href="./CSS/footer.css" />
+    <link rel="stylesheet" href="./CSS/details-product.css" />
+    <link rel="stylesheet" href="./CSS/cart-fav.css" />
+    <link rel="stylesheet" href="./CSS/log-sig.css" />
+    <link rel="stylesheet" href="./CSS/checkout.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <!-- Link Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+    />
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!-- sweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <header>
+      <div class="top-header">
+        <div class="container">
+          <a href="#" class="logo" onclick="ShowPage(event, 'home')"
+            ><img src="./imges/logo1.jpeg" alt="#"
+          /></a>
+          <form class="search-box" onsubmit="searchProducts(event)">
+            <input
+              oninput="liveSearch()"
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search From Product"
+            />
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+
+          <div class="header-icon">
+            <div class="icon">
+              <a href="#" onclick="showFavPreview()">
+                <i class="fa-regular fa-heart"></i>
+                <span class="count count-favourite" id="counter-fav">0</span>
+              </a>
+            </div>
+            <div class="icon">
+              <a href="#">
+                <i
+                  class="fa-solid fa-cart-arrow-down"
+                  onclick="ShowPage(event, 'cart-page')"
+                ></i>
+                <span class="count count-card" id="counter-card">0</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-header">
+        <div class="container">
+          <nav class="nav">
+            <div class="category-nav">
+              <div class="select-box">
+                <select name="category" id="select_category" class="category">
+                  <option value="all">All Category</option>
+                </select>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <ul class="nav-links">
+              <li class="active" onclick="ShowPage(event, 'home')">
+                <a href="#">Home</a>
+              </li>
+              <li><a href="#">About</a></li>
+              <li onclick="ShowPage(event, 'contact')">
+                <a href="#">Contact</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="login-signup btns">
+            <a href="#" class="btn login-btn" onclick="ShowPage(event, 'login')"
+              >Login <i class="fa-solid fa-arrow-right-to-bracket"></i
+            ></a>
+            <a
+              href="#"
+              class="btn sign-btn"
+              onclick="ShowPage(event, 'register')"
+              >Sign Up <i class="fa-solid fa-user-plus"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Home page -->
+    <section id="home" class="page active">
+      <!-- Swiper -->
+      <div class="hero">
+        <div class="container">
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="offer-box">
+                  <h4>
+                    <span><i class="fa-solid fa-fire-flame-curved"></i></span>
+                    Limited Offer
+                  </h4>
+                  <h3>Microsoft Xbox – Save up to 30%</h3>
+                  <p>
+                    Get the ultimate gaming experience now with a special
+                    discount. Hurry before it’s gone!
+                  </p>
+                  <a href="#"><button class="btn-offer">Show Now</button></a>
+                </div>
+                <img src="./imges/banner_Hero1.jpg" alt="#" />
+              </div>
+              <div class="swiper-slide">
+                <div class="offer-box">
+                  <h4>
+                    <span><i class="fa-solid fa-fire-flame-curved"></i></span>
+                    Limited Offer
+                  </h4>
+                  <h3>Microsoft Xbox – Save up to 30%</h3>
+                  <p>
+                    Get the ultimate gaming experience now with a special
+                    discount. Hurry before it’s gone!
+                  </p>
+                  <a href="#"><button class="btn-offer">Show Now</button></a>
+                </div>
+                <img src="./imges/banner_Hero2.jpg" alt="#" />
+              </div>
+              <div class="swiper-slide">
+                <div class="offer-box">
+                  <h4>
+                    <span><i class="fa-solid fa-fire-flame-curved"></i></span>
+                    Limited Offer
+                  </h4>
+                  <h3>Microsoft Xbox – Save up to 30%</h3>
+                  <p>
+                    Get the ultimate gaming experience now with a special
+                    discount. Hurry before it’s gone!
+                  </p>
+                  <a href="#"><button class="btn-offer">Show Now</button></a>
+                </div>
+                <img src="./imges/banner_Hero3.jpg" alt="#" />
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <div class="slider-product">
+          <div id="header-top" class="header-for-category header-after">
+            <h2 id="category_title"></h2>
+            <p id="category_desc"></p>
+          </div>
+          <div class="container" id="container">
+            <!-- loading -->
+            <div id="status"></div>
+
+            <div class="card"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- details for products -->
+    <section id="details-product" class="page">
+      <div class="images">
+        <div class="big-image">
+          <img src="" alt="" />
+        </div>
+        <div class="samll-image">
+          <img src="" alt="" />
+          <img src="" alt="" />
+          <img src="" alt="" />
+        </div>
+      </div>
+
+      <div id="container-details"></div>
+    </section>
+    <section id="cart-page" class="page page-cart">
+      <div class="container">
+        <h2>My Cart</h2>
+        <div id="cart-items"></div>
+        <div class="cart-total">
+          <h3>Total: <span id="cart-total-price">0</span></h3>
+          <button
+            class="checkout-btn"
+            onclick="requireLogin(() => ShowPage(event, 'checkout'))"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- checkout -->
+    <section id="checkout" class="page">
+      <div class="container">
+        <h2>Checkout</h2>
+
+        <div class="checkout-wrapper">
+          <!-- Left: User Details Form -->
+          <div class="checkout-form">
+            <h3>Your Details</h3>
+
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="fullname" placeholder="Ali Ahmed" />
+            </div>
+
+            <div class="form-group">
+              <label>Email To Contact</label>
+              <input type="email" id="email" placeholder="Ali@email.com" />
+            </div>
+
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" id="phone" placeholder="+20 1081505163" />
+            </div>
+
+            <div class="form-group">
+              <label>Shipping Address</label>
+              <input type="text" id="address" placeholder="123 Nile Street" />
+            </div>
+
+            <div class="form-group two-col">
+              <div>
+                <label>City</label>
+                <input type="text" id="city" placeholder="Cairo" />
+              </div>
+              <div>
+                <label>ZIP Code</label>
+                <input type="text" id="zip" placeholder="12703" />
+              </div>
+            </div>
+
+            <button class="btn-order" onclick="placeOrder()">
+              Place Order
+            </button>
+          </div>
+
+          <!--Order Summary -->
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div id="summary-items">
+              <!-- Items by JS -->
+            </div>
+            <div class="summary-total">
+              <span>Total</span>
+              <span id="summary-total">$0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About page-->
+    <section id="contact" class="page">
+      <h1>about Section</h1>
+    </section>
+
+    <!-- login -->
+    <section id="login" class="page login">
+      <div class="auth-container">
+        <div class="auth-box">
+          <form id="loginForm" class="auth-form">
+            <h2>Welcome Back</h2>
+
+            <div class="input-group">
+              <input type="email" id="login-email" required />
+              <label>Email</label>
+            </div>
+
+            <div class="input-group">
+              <input type="password" id="login-password" required />
+              <label>Password</label>
+            </div>
+
+            <button type="submit" class="btn-auth">Login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- register -->
+    <section id="register" class="page register">
+      <div class="auth-container">
+        <div class="auth-box">
+          <form id="registerForm" class="auth-form">
+            <h2>Create Account</h2>
+
+            <div class="input-group">
+              <input type="text" id="reg-name" required />
+              <label>Name</label>
+            </div>
+
+            <div class="input-group">
+              <input type="email" id="reg-email" required />
+              <label>Email</label>
+            </div>
+
+            <div class="input-group">
+              <input type="password" id="reg-password" required />
+              <label>Password</label>
+            </div>
+
+            <button type="submit" class="btn-auth">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-row">
+          <!-- About -->
+          <div class="footer-col">
+            <h4>Nove Store <i class="fa-solid fa-cart-arrow-down"></i></h4>
+            <p>
+              Discover premium products at unbeatable prices. Shop with
+              confidence and enjoy a seamless experience.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Offers</a></li>
+              <li><a href="#">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Customer Service</h4>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Return Policy</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Subscribe</h4>
+            <p>Get updates on new products & offers</p>
+
+            <form class="newsletter">
+              <input
+                type="email"
+                id="emailInput"
+                placeholder="Enter your email"
+                required
+              />
+              <button type="submit">Subscribe</button>
+            </form>
+
+            <div class="social-links">
+              <a href="#" class="face"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" class="insta"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" class="twitt"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#" class="tube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="shipping">
+          <p>
+            <i class="fa-solid fa-car-side"></i> Fast Delivery within 2-5 days
+          </p>
+          <p>
+            <i class="fa-solid fa-arrow-rotate-left"></i> Easy Returns & Refund
+            Policy
+          </p>
+        </div>
+
+        <div class="payment">
+          <p>Payment Methods:</p>
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-brands fa-paypal"></i>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 All Rights Reserved | Nove Store</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./Pages/swiperhome.js"></script>
+    <script src="./Pages/datails.js"></script>
+    <script src="./Pages/cart.js"></script>
+    <script src="./Pages/fav.js"></script>
+    <script src="./Pages/Login.js"></script>
+    <script src="./Pages/sgin.js"></script>
+    <script src="./Pages/checkout.js"></script>
+  </body>
+</html>
